@@ -22,13 +22,6 @@ spec:
       - name: multitool
         image: wbitt/network-multitool
         command: ['sh', '-c', 'tail -f /input/syslog']
-#        resources:
- #         requests:
-  #          memory: "64Mi"
-   #         cpu: "250m"
-    #      limits:
-     #       memory: "128Mi"
-      #      cpu: "1"
         volumeMounts:
         - name: varlog
           mountPath: /input
