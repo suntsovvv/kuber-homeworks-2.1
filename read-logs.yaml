@@ -21,7 +21,7 @@ spec:
       containers:
       - name: multitool
         image: wbitt/network-multitool
-#        command: ['sh', '-c', 'while true; do grep "microk8s" /input/syslog | tail -10; sleep 10; done']
+        command: ['sh', '-c', 'tail -f /input/syslog']
 #        resources:
  #         requests:
   #          memory: "64Mi"
