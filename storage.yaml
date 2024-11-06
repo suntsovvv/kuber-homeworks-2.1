@@ -1,14 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: storage
-  labels:
-    app: apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: my-deployment
-  labels:
-    app: storage
+  name: storage-deployment
 spec:
   replicas: 1
   selector:
@@ -23,14 +16,11 @@ spec:
       - name: busybox
         image: busybox:latest
         command: ['sh', '-c', 'while true; do date >> /data/output.txt; sleep 5; done']
-#        ports:
-#        - containerPort: 80
         volumeMounts:
         - name: safedata
           mountPath: /data
       - name: multitool
         image: wbitt/network-multitool
-        command: ['sh', '-c', 'while true; do cat /data/output.txt; sleep 10; done']
         ports:
         - containerPort: 8080
         env:

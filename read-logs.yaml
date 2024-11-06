@@ -11,25 +11,18 @@ spec:
       labels:
         name: read-logs
     spec:
-#      tolerations:
-#      - key: node-role.kubernetes.io/control-plane
- #       operator: Exists
-  #      effect: NoSchedule
-   #   - key: node-role.kubernetes.io/master
-    #    operator: Exists
-     #   effect: NoSchedule
       containers:
       - name: multitool
         image: wbitt/network-multitool
-        command: ['sh', '-c', 'tail -f /input/syslog']
+        ports:
         volumeMounts:
         - name: varlog
           mountPath: /input
-      # it may be desirable to set a high priority class to ensure that a DaemonSet Pod
-      # preempts running Pods
-      # priorityClassName: important
-      #terminationGracePeriodSeconds: 30
+          readOnly: true
+        securityContext:
+
       volumes:
       - name: varlog
         hostPath:
           path: /var/log
+          
